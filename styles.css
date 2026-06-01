@@ -342,3 +342,239 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f9f7;
+}
+
+header {
+    background-color: #006633;
+    color: white;
+    padding: 20px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-datos h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.header-datos p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.header-logo img {
+    border-radius: 4px;
+    border: 2px solid white;
+}
+
+nav {
+    background-color: #1a1a1a;
+    padding: 12px;
+    text-align: center;
+}
+
+.nav-links a, .nav-links span {
+    color: white;
+    text-decoration: none;
+    padding: 5px 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #28a745;
+}
+
+.nav-links .active {
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* ACOMODO AUTOMÁTICO DE ÍCONOS DE LA CASA CON URL SEGURA (HTTPS) */
+.btn-nav::before, 
+.enlace-boton::before, 
+.btn-inicio::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.enlace-boton::before, .btn-inicio::before {
+    background-image: url('https://img.icons8.com/material-rounded/24/ffffff/home.png');
+}
+
+.btn-nav::before {
+    background-image: url('https://img.icons8.com/material-rounded/24/006633/home.png');
+}
+
+.enlace-boton, .btn-inicio {
+    display: inline-flex;
+    align-items: center;
+    background-color: #006633;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-nav {
+    display: inline-flex;
+    align-items: center;
+    color: #006633;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h2, h3 {
+    color: #006633;
+    margin-bottom: 15px;
+}
+
+.introduccion::first-letter, 
+.capital-text::first-letter, 
+.intro-galeria::first-letter,
+.capital::first-letter {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #006633;
+    float: left;
+    line-height: 1;
+    margin-right: 8px;
+    font-family: Georgia, serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table caption {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+thead th {
+    background-color: #006633;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+fieldset {
+    border: 2px solid #006633;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+legend {
+    color: #006633;
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+input[type="text"], input[type="email"], input[type="number"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.btn-submit {
+    background-color: #006633;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.tabla-galeria td {
+    text-align: center;
+    width: 33.33%;
+}
+
+.img-borde {
+    border: 3px solid #ddd;
+    border-radius: 4px;
+}
+
+.pie-foto {
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.mapa-jerarquia ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.lista-vinetas {
+    list-style-type: disc !important;
+    padding-left: 30px !important;
+}
+
+footer {
+    background-color: #1a1a1a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+footer a {
+    color: #28a745;
+    text-decoration: none;
+}
