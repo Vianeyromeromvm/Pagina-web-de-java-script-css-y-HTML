@@ -3,94 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enviar a un Amigo | CONALEP</title>
+    <title>Recomendar Actividad | CONALEP</title>
     <link rel="stylesheet" href="styles.css">
     <script type="text/javascript" src="script.js"></script>
-    <style>
-        body {
-            background-color: #f4f9f7;
-        }
-    </style>
 </head>
 <body>
-
-    <noscript>
-        <div style="background-color: #ffcccc; color: #cc0000; padding: 15px; text-align: center; font-weight: bold;">
-            Para enviar y ejecutar scripts interactivos de recomendación active JavaScript.
-        </div>
-    </noscript>
     
     <header>
-        <p style="text-align: right;">
-            <a href="index.html" class="enlace-boton">Volver al Inicio</a>
-        </p>
-        <h1>RECOMENDAR EVENTO</h1>
+        <div class="header-container">
+            <h1>Compartir Actividades con un Amigo</h1>
+            <nav><a href="index.html" class="btn-inicio">Volver al Inicio</a></nav>
+        </div>
     </header>
 
     <main>
-        <section class="contenido-texto">
-            <p class="introduccion">
-                Bienvenido a nuestra plataforma de eventos. Comparte con tus amigos las mejores experiencias académicas y culturales del CONALEP.
-            </p>
-        </section>
-
         <form action="mailto:vianney@correo.com" method="post" enctype="text/plain">
             <fieldset>
-                <legend>Datos para Compartir</legend>
+                <legend>Recomendación Directa</legend>
                 
-                <div class="campo-formulario">
-                    <label for="remitente">Tu nombre:</label>
-                    <input type="text" id="remitente" name="remitente" maxlength="30" required>
+                <div class="form-group">
+                    <label for="remitente">Tu Nombre:</label>
+                    <input type="text" id="remitente" required>
                 </div>
 
-                <div class="campo-formulario">
-                    <label for="destinatario">Correo del amigo:</label>
-                    <input type="email" id="destinatario" name="destinatario" required>
+                <div class="form-group">
+                    <label for="destinatario">Correo de tu Compañero:</label>
+                    <input type="email" id="destinatario" required>
                 </div>
 
-                <div class="campo-formulario">
-                    <label for="evento_lista">Evento a recomendar:</label>
-                    <select id="evento_lista" name="evento_lista">
-                        <option value="feria">Feria de Tecnología</option>
-                        <option value="torneo">Torneo de Fútbol</option>
-                        <option value="teatro">Muestra de Teatro</option>
-                    </select>
-                </div>
-
-                <div class="campo-formulario">
-                    <label for="nota">Comentario adicional:</label>
-                    <textarea id="nota" name="nota" rows="4" maxlength="100"></textarea>
+                <div class="form-group">
+                    <label for="nota">Mensaje:</label>
+                    <textarea id="nota" rows="3"></textarea>
                 </div>
 
                 <div class="acciones">
-                    <input type="submit" value="Enviar Invitación" class="btn-enviar">
+                    <input type="submit" value="Enviar Invitación" class="btn-submit">
                 </div>
             </fieldset>
         </form>
 
-        <section class="informacion-adicional">
-            <h3>Lista de Beneficios</h3>
-            <ul class="lista-beneficios">
-                <li>Acceso prioritario.</li>
-                <li>Constancia de participación.</li>
-                <li>Material gratuito.</li>
-            </ul>
-
+        <section style="margin-top: 30px;">
             <table class="tabla-eventos">
-                <caption>Horarios de Eventos</caption>
+                <caption>Horarios Base de las Actividades Compartidas</caption>
                 <thead>
                     <tr>
-                        <th>Evento</th>
-                        <th>Horario</th>
+                        <th>Clasificación</th>
+                        <th>Horario Oficial</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Tecnología</td>
+                        <td>Eventos de Tecnología de Mañana</td>
                         <td>10:00 AM</td>
                     </tr>
                     <tr>
-                        <td>Teatro</td>
+                        <td>Muestras Culturales de Tarde</td>
                         <td>04:00 PM</td>
                     </tr>
                 </tbody>
@@ -99,9 +66,7 @@
     </main>
 
     <footer>
-        <p style="text-align: center;">
-            <a href="index.html" class="enlace-boton">Volver a Inicio</a>
-        </p>
+        <p style="text-align: center;"><a href="index.html" class="enlace-boton">Inicio</a></p>
     </footer>
 </body>
 </html>
