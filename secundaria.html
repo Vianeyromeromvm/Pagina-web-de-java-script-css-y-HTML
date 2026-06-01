@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Eventos CONALEP</title>
+    <!-- Etiqueta LINK para CSS externo (Indicador 15%) -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Etiqueta STYLE para CSS interno (Indicador 15%) -->
+    <style>
+        /* Estilo específico para el pie de página */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <p style="text-align: right;"><a href="index.html" class="btn-nav">Volver al Inicio</a></p>
+        <h1>Contacto y Consultas</h1>
+    </header>
+
+    <main>
+        <!-- Texto con Letra Capital (Uso de pseudo-elemento) -->
+        <p class="capital-text">
+            Si tienes alguna duda sobre los procesos de inscripción a nuestros eventos deportivos, culturales o académicos, 
+            por favor utiliza el siguiente formulario. Nuestro equipo administrativo te responderá en un plazo máximo de 48 horas.
+        </p>
+
+        <form action="mailto:vromero@conalep.edu.mx" method="post" enctype="text/plain" name="form_contacto">
+            <fieldset>
+                <legend>Envíanos tus dudas</legend>
+                
+                <!-- Uso de DIVs para alinear elementos (Indicador Formularios) -->
+                <div class="form-group">
+                    <label for="nom">Nombre Completo:</label>
+                    <input type="text" id="nom" name="nombre" maxlength="50" required placeholder="Ej. Juan Pérez">
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">Correo Electrónico:</label>
+                    <input type="email" id="correo" name="email" required placeholder="usuario@correo.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="interes">Interés principal:</label>
+                    <select id="interes" name="interes">
+                        <option value="deportes">Deportes</option>
+                        <option value="cultura">Cultura</option>
+                        <option value="acad">Académico</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="msg">Mensaje:</label>
+                    <textarea id="msg" name="mensaje" rows="5"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" id="terminos" name="terminos" checked> 
+                    <label style="display:inline;" for="terminos">Acepto recibir notificaciones.</label>
+                </div>
+
+                <div class="acciones">
+                    <input type="submit" value="Enviar Información" class="btn-submit">
+                    <input type="reset" value="Limpiar Formulario" class="btn-as-link"> <!-- Botón como enlace -->
+                </div>
+            </fieldset>
+        </form>
+
+        <section>
+            <h3>Detalles de Interés</h3>
+            <ul class="beneficios">
+                <li>Atención personalizada.</li>
+                <li>Trámites 100% digitales.</li>
+                <li>Soporte técnico 24/7.</li>
+            </ul>
+
+            <table class="tabla-info">
+                <caption>Disponibilidad de Atención</caption>
+                <thead>
+                    <tr>
+                        <th>Departamento</th>
+                        <th>Horario</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Coordinación Académica</td>
+                        <td>08:00 - 14:00</td>
+                        <td>Activo</td>
+                    </tr>
+                    <tr>
+                        <td>Servicios Escolares</td>
+                        <td>10:00 - 18:00</td>
+                        <td>Activo</td>
+                    </tr>
+                    <tr>
+                        <td>Actividades Extraescolares</td>
+                        <td>14:00 - 20:00</td>
+                        <td>En receso</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>Vianney Romero García | Grupo 6205 | <abbr title="Colegio Nacional de Educación Profesional Técnica">CONALEP</abbr></p>
+    </footer>
+
+</body>
+</html>

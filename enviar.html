@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar a un Amigo | CONALEP</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="script.js"></script>
+    <style>
+        body {
+            background-color: #f4f9f7;
+        }
+    </style>
+</head>
+<body>
+
+    <noscript>
+        <div style="background-color: #ffcccc; color: #cc0000; padding: 15px; text-align: center; font-weight: bold;">
+            Para enviar y ejecutar scripts interactivos de recomendación active JavaScript.
+        </div>
+    </noscript>
+    
+    <header>
+        <p style="text-align: right;">
+            <a href="index.html" class="enlace-boton">Volver al Inicio</a>
+        </p>
+        <h1>RECOMENDAR EVENTO</h1>
+    </header>
+
+    <main>
+        <section class="contenido-texto">
+            <p class="introduccion">
+                Bienvenido a nuestra plataforma de eventos. Comparte con tus amigos las mejores experiencias académicas y culturales del CONALEP.
+            </p>
+        </section>
+
+        <form action="mailto:vianney@correo.com" method="post" enctype="text/plain">
+            <fieldset>
+                <legend>Datos para Compartir</legend>
+                
+                <div class="campo-formulario">
+                    <label for="remitente">Tu nombre:</label>
+                    <input type="text" id="remitente" name="remitente" maxlength="30" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="destinatario">Correo del amigo:</label>
+                    <input type="email" id="destinatario" name="destinatario" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="evento_lista">Evento a recomendar:</label>
+                    <select id="evento_lista" name="evento_lista">
+                        <option value="feria">Feria de Tecnología</option>
+                        <option value="torneo">Torneo de Fútbol</option>
+                        <option value="teatro">Muestra de Teatro</option>
+                    </select>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="nota">Comentario adicional:</label>
+                    <textarea id="nota" name="nota" rows="4" maxlength="100"></textarea>
+                </div>
+
+                <div class="acciones">
+                    <input type="submit" value="Enviar Invitación" class="btn-enviar">
+                </div>
+            </fieldset>
+        </form>
+
+        <section class="informacion-adicional">
+            <h3>Lista de Beneficios</h3>
+            <ul class="lista-beneficios">
+                <li>Acceso prioritario.</li>
+                <li>Constancia de participación.</li>
+                <li>Material gratuito.</li>
+            </ul>
+
+            <table class="tabla-eventos">
+                <caption>Horarios de Eventos</caption>
+                <thead>
+                    <tr>
+                        <th>Evento</th>
+                        <th>Horario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tecnología</td>
+                        <td>10:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>Teatro</td>
+                        <td>04:00 PM</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p style="text-align: center;">
+            <a href="index.html" class="enlace-boton">Volver a Inicio</a>
+        </p>
+    </footer>
+</body>
+</html>

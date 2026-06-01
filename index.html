@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos CONALEP | Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+
+    <noscript>
+        <div style="background-color: #ffcccc; color: #cc0000; padding: 15px; text-align: center; font-weight: bold;">
+            Su navegador no tiene activado JavaScript. Active las instrucciones de script para experimentar la interactividad completa de la plataforma.
+        </div>
+    </noscript>
+
+    <header>
+        <div class="header-container">
+            <div class="header-datos">
+                <h1>Portal de Eventos Institucionales</h1>
+                <p>
+                    <strong>Alumno:</strong> Vianney Romero García &nbsp;&nbsp;
+                    <strong>Grupo:</strong> 6205 <br>
+                    <strong>Módulo:</strong> <dfn>DEWE-20</dfn> (Diseño de páginas web) <br>
+                    <strong>Docente:</strong> Rogelio Sánchez López &nbsp;&nbsp; <strong>Fecha:</strong> 12/03/2026
+                </p>
+            </div>
+            <div class="header-logo">
+                <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=150" 
+                     alt="Logo Institucional" width="150" height="100" usemap="#logomap" name="img_logo">
+                <map name="logomap">
+                    <area shape="rect" coords="0,0,150,100" href="index.html" alt="Ir a inicio">
+                </map>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-links">
+            <span class="active">INICIO</span> | 
+            <a href="eventos.html">EVENTOS</a> | 
+            <a href="galeria.html">GALERÍA</a> | 
+            <a href="contacto.html">CONTACTO</a> | 
+            <a href="enviar.html">RECOMENDAR</a> |
+            <a href="mapa.html">MAPA DEL SITIO</a>
+        </div>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Bienvenida a la Comunidad <acronym title="Colegio Nacional de Educación Profesional Técnica">CONALEP</acronym></h2>
+            <p class="introduccion">
+                En la actualidad, los sitios web son una herramienta <abbr title="Importante">imp.</abbr> para compartir información. 
+                Este proyecto busca difundir eventos <em>escolares</em>, <strong>culturales</strong> y deportivos.
+            </p>
+            
+            <blockquote cite="https://www.conalep.edu.mx">
+                "Educación técnica para la equidad y el bienestar."
+            </blockquote>
+
+            <p style="margin: 20px 0; text-align: center;">
+                <button type="button" class="enlace-boton" onclick="calcularDiasEvento()">Verificar Disponibilidad del Sitio</button>
+            </p>
+
+            <h3>Próximos Eventos Destacados</h3>
+            <table class="tabla-eventos">
+                <caption>Calendario Mensual de Actividades</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Evento</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Lugar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Torneo de Fútbol</td>
+                        <td>15 de Marzo</td>
+                        <td>Canchas Deportivas</td>
+                    </tr>
+                    <tr>
+                        <td>Feria de <del>Ciencias</del> <ins>Tecnología</ins></td>
+                        <td>20 de Marzo</td>
+                        <td>Explanada Principal</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h3>Información Técnico-Estructural</h3>
+            <p>Para la creación de este sitio se utilizó el siguiente comando:</p>
+            <pre>
+                <code>
+                    SAVE AS: index.html
+                    ENCODING: UTF-8
+                </code>
+            </pre>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Vianney Romero García. <cite>Proyecto Académico CONALEP</cite></p>
+        <p><a href="javascript:window.print()" class="btn-print">[Imprimir Reporte]</a></p>
+    </footer>
+
+</body>
+</html>

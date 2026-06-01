@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Eventos | CONALEP</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="script.js"></script>
+    <style>
+        header {
+            background-color: #006633;
+            color: white;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <noscript>
+        <div style="background-color: #ffcccc; color: #cc0000; padding: 15px; text-align: center; font-weight: bold;">
+            JavaScript está deshabilitado. Active el motor de script para interactuar con las tablas.
+        </div>
+    </noscript>
+
+    <header>
+        <div class="header-container">
+            <h2>CONALEP - Calendario Oficial</h2>
+            <nav>
+                <a href="index.html" class="btn-inicio">Volver al Inicio</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Programación de Actividades 2026</h1>
+        <p class="intro">
+            A continuación se detallan los eventos <abbr title="Académicos">Acad.</abbr> y deportivos programados para el semestre actual. 
+            Nuestra institución busca fomentar el desarrollo integral de los alumnos a través de competencias tecnológicas y físicas.
+        </p>
+
+        <p style="margin-bottom: 20px; text-align: right;">
+            <button type="button" class="enlace-boton" onclick="gestionarCatalogoEventos()">Analizar Arreglo de Datos (Muestra Técnica)</button>
+        </p>
+
+        <table class="tabla-eventos">
+            <caption>Eventos del Mes de Marzo</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Evento</th>
+                    <th scope="col">Ubicación</th>
+                    <th scope="col">Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-img"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=100" alt="Taller"></td>
+                    <td><strong>Feria de Robótica</strong></td>
+                    <td><address>Aula Magna, Edificio A</address></td>
+                    <td>Concurso de proyectos <ins>automatizados</ins>. <br> <small>Hora: 10:00 AM</small></td>
+                </tr>
+                <tr>
+                    <td class="col-img"><img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=100" alt="Deportes Balón"></td>
+                    <td><strong>Intercolegial de Fútbol</strong></td>
+                    <td>Canchas Externas</td>
+                    <td>Final estatal entre <del>4</del> <ins>8</ins> planteles seleccionados.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <section class="lista-seccion">
+            <h3>Requisitos de Participación</h3>
+            <ul class="lista-requisitos">
+                <li>Credencial vigente.</li>
+                <li>Uniforme deportivo o de gala.</li>
+                <li>Registro previo en plataforma.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Vianney Romero García | Grupo: 6205 | <cite>Fuente: Dirección General CONALEP</cite></p>
+    </footer>
+
+</body>
+</html>

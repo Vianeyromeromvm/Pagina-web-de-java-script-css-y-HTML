@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa del Sitio | CONALEP</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="script.js"></script>
+    <style>
+        .contenedor-objeto {
+            margin: 20px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <noscript>
+        <div style="background-color: #ffcccc; color: #cc0000; padding: 15px; text-align: center; font-weight: bold;">
+            Estructura estática cargada. Active los scripts para soporte dinámico del mapa.
+        </div>
+    </noscript>
+
+    <header>
+        <p style="text-align: right;"><a href="index.html" class="btn-nav">Volver al Inicio</a></p>
+        <h1>Mapa Estructural del Sitio Web</h1>
+    </header>
+    
+    <main>
+        <section class="seccion-texto">
+            <p class="capital">
+                A continuación se presenta la jerarquía técnica de archivos para el proyecto <code>DEWE-20</code>. 
+                Esta estructura permite una navegación fluida y organizada para todos los usuarios del plantel.
+            </p>
+        </section>
+
+        <nav class="mapa-jerarquia">
+            <ul>
+                <li><strong>Nivel Principal</strong>
+                    <ul class="lista-vinetas">
+                        <li><a href="index.html">Página de Inicio</a> (Información General y Bienvenida)</li>
+                    </ul>
+                </li>
+                <li><strong>Nivel Secundario</strong>
+                    <ul class="lista-vinetas">
+                        <li><a href="eventos.html">Eventos</a> (Calendario y Detalles de Actividades)</li>
+                        <li><a href="galeria.html">Galería</a> (Registro Fotográfico de Eventos)</li>
+                        <li><a href="contacto.html">Contacto</a> (Formulario de Consultas)</li>
+                        <li><a href="enviar.html">Enviar a un Amigo</a> (Función de Compartir)</li>
+                    </ul>
+                </li>
+                <li><strong>Documentación y Soporte</strong>
+                    <ul class="lista-vinetas">
+                        <li><a href="mapa.html" class="active">Mapa del Sitio</a> (Estructura Jerárquica Actual)</li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="contenedor-objeto">
+            <object data="https://www.gob.mx" width="90%" height="300">
+                <p>Tu navegador no soporta visualización de documentos externos.</p>
+            </object>
+        </div>
+    </main>
+
+    <footer>
+        <p>Alumno: Vianney Romero García | Grupo 6205 | <abbr title="Colegio Nacional de Educación Profesional Técnica">CONALEP</abbr></p>
+    </footer>
+</body>
+</html>
