@@ -4,13 +4,247 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendario de Eventos | CONALEP</title>
+    
     <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="script.js"></script>
     <style>
+        /* --- VARIABLES DE DISEÑO MODERNO (DESIGN SYSTEM UNIFICADO) --- */
+        :root {
+            --primary: #004d40;
+            --primary-light: #00796b;
+            --primary-dark: #00251a;
+            --secondary: #37474f;
+            --accent: #2e7d32;
+            --accent-danger: #c62828;
+            --bg-main: #f4f6f8;
+            --bg-card: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #607d8b;
+            --radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-main);
+        }
+
+        /* --- HEADER MODERNO --- */
         header {
-            background-color: #006633;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
             color: white;
-            padding: 10px 20px;
+            padding: 24px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .btn-inicio {
+            color: #b2dfdb;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 1px solid rgba(178, 223, 219, 0.3);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .btn-inicio:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: 1.8fr 1fr;
+            gap: 32px;
+        }
+        @media (max-width: 950px) {
+            main { grid-template-columns: 1fr; }
+        }
+
+        .seccion-encabezado {
+            grid-column: 1 / -1;
+        }
+        main h1 {
+            margin: 0 0 15px 0;
+            color: var(--primary-dark);
+            font-size: 2.2rem;
+        }
+        .intro {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            background-color: #e0f2f1;
+            padding: 16px 20px;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin: 0 0 10px 0;
+        }
+
+        /* --- CONTROLES Y FILTROS INTERACTIVOS --- */
+        .contenedor-controles {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-card);
+            padding: 16px 24px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.02);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .enlace-boton {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 6px rgba(0,77,64,0.15);
+        }
+        .enlace-boton:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-1px);
+        }
+
+        /* --- TABLA DE EVENTOS ESTILIZADA --- */
+        .bloque-tabla {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.03);
+            overflow-x: auto;
+        }
+        .tabla-eventos {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .tabla-eventos caption {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 14px;
+            text-align: left;
+        }
+        .tabla-eventos th {
+            background-color: #f8fafc;
+            color: var(--secondary);
+            padding: 16px;
+            font-weight: 700;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .tabla-eventos td {
+            padding: 16px;
+            border-bottom: 1px solid #edf2f7;
+            vertical-align: middle;
+        }
+        .tabla-eventos tr:last-child td {
+            border-bottom: none;
+        }
+
+        .col-img img {
+            border-radius: 6px;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            display: block;
+        }
+        address {
+            font-style: normal;
+            color: var(--text-main);
+        }
+
+        /* --- REQUISITOS Y DETALLES LATERALES --- */
+        .bloque-lateral {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .lista-seccion {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .lista-seccion h3 {
+            margin-top: 0;
+            color: var(--secondary);
+            font-size: 1.25rem;
+            border-bottom: 2px dashed #e2e8f0;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+        }
+        .lista-requisitos {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .lista-requisitos li {
+            margin-bottom: 12px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        .lista-requisitos li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* --- CONTENEDOR DE ARREGLOS DINÁMICOS JS --- */
+        .card-arreglo {
+            background: linear-gradient(145deg, #ffffff, #f0fdf4);
+            border: 1px solid #bbf7d0;
+            display: none; /* Controlado con JS */
+        }
+        .card-arreglo h4 {
+            margin: 0 0 10px 0;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+        .log-consola {
+            background-color: var(--primary-dark);
+            color: #a7f3d0;
+            padding: 14px;
+            border-radius: 6px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            margin: 0;
+            overflow-x: auto;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: #b2dfdb;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            font-size: 0.95rem;
         }
     </style>
 </head>
@@ -18,7 +252,7 @@
 
     <noscript>
         <div style="background-color: #ffcccc; color: #cc0000; padding: 15px; text-align: center; font-weight: bold;">
-            JavaScript está deshabilitado. Active el motor de script para interactuar con las tablas.
+            JavaScript est&aacute; deshabilitado. Active el motor de script para interactuar con el cat&aacute;logo de eventos de la instituci&oacute;n.
         </div>
     </noscript>
 
@@ -32,55 +266,99 @@
     </header>
 
     <main>
-        <h1>Programación de Actividades 2026</h1>
-        <p class="intro">
-            A continuación se detallan los eventos <abbr title="Académicos">Acad.</abbr> y deportivos programados para el semestre actual. 
-            Nuestra institución busca fomentar el desarrollo integral de los alumnos a través de competencias tecnológicas y físicas.
-        </p>
+        <div class="seccion-encabezado">
+            <h1>Programaci&oacute;n de Actividades 2026</h1>
+            <p class="intro">
+                A continuaci&oacute;n se detallan los eventos <abbr title="Acad&eacute;micos">Acad.</abbr> y deportivos programados para el semestre actual. Nuestra instituci&oacute;n busca fomentar el desarrollo integral de los alumnos a trav&eacute;s de competencias tecnol&oacute;gicas y f&iacute;sicas.
+            </p>
+        </div>
 
-        <p style="margin-bottom: 20px; text-align: right;">
-            <button type="button" class="enlace-boton" onclick="gestionarCatalogoEventos()">Analizar Arreglo de Datos (Muestra Técnica)</button>
-        </p>
+        <div class="contenedor-controles">
+            <span style="font-weight: 600; color: var(--text-muted);">M&oacute;dulo: DEWE-20</span>
+            <button type="button" id="btn-analizar" class="enlace-boton">Analizar Arreglo de Datos (Muestra T&eacute;cnica)</button>
+        </div>
 
-        <table class="tabla-eventos">
-            <caption>Eventos del Mes de Marzo</caption>
-            <thead>
-                <tr>
-                    <th scope="col">Imagen</th>
-                    <th scope="col">Evento</th>
-                    <th scope="col">Ubicación</th>
-                    <th scope="col">Detalles</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="col-img"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=100" alt="Taller"></td>
-                    <td><strong>Feria de Robótica</strong></td>
-                    <td><address>Aula Magna, Edificio A</address></td>
-                    <td>Concurso de proyectos <ins>automatizados</ins>. <br> <small>Hora: 10:00 AM</small></td>
-                </tr>
-                <tr>
-                    <td class="col-img"><img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=100" alt="Deportes Balón"></td>
-                    <td><strong>Intercolegial de Fútbol</strong></td>
-                    <td>Canchas Externas</td>
-                    <td>Final estatal entre <del>4</del> <ins>8</ins> planteles seleccionados.</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <section class="lista-seccion">
-            <h3>Requisitos de Participación</h3>
-            <ul class="lista-requisitos">
-                <li>Credencial vigente.</li>
-                <li>Uniforme deportivo o de gala.</li>
-                <li>Registro previo en plataforma.</li>
-            </ul>
+        <section class="bloque-tabla">
+            <table class="tabla-eventos">
+                <caption>Eventos del Mes de Marzo</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Evento</th>
+                        <th scope="col">Ubicaci&oacute;n</th>
+                        <th scope="col">Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-img"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=100" alt="Taller" width="100" height="65"></td>
+                        <td><strong>Feria de Rob&oacute;tica</strong></td>
+                        <td><address>Aula Magna, Edificio A</address></td>
+                        <td>Concurso de proyectos <ins>automatizados</ins>. <br> <small>Hora: 10:00 AM</small></td>
+                    </tr>
+                    <tr>
+                        <td class="col-img"><img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=100" alt="Deportes Bal&oacute;n" width="100" height="65"></td>
+                        <td><strong>Intercolegial de F&uacute;tbol</strong></td>
+                        <td>Canchas Externas</td>
+                        <td>Final estatal entre <del>4</del> <ins>8</ins> planteles seleccionados.</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
+
+        <div class="bloque-lateral">
+            <section class="lista-seccion">
+                <h3>Requisitos de Participaci&oacute;n</h3>
+                <ul class="lista-requisitos">
+                    <li>Credencial vigente.</li>
+                    <li>Uniforme deportivo o de gala.</li>
+                    <li>Registro previo en plataforma.</li>
+                </ul>
+            </section>
+
+            <section id="card-js" class="lista-seccion card-arreglo">
+                <h4>📊 Matriz de Memoria Interna</h4>
+                <p style="font-size: 0.9rem; margin: 0 0 10px 0;">Datos crudos recuperados del arreglo multidimensional:</p>
+                <pre class="log-consola" id="salida-arreglo"></pre>
+            </section>
+        </div>
     </main>
 
     <footer>
-        <p>Vianney Romero García | Grupo: 6205 | <cite>Fuente: Dirección General CONALEP</cite></p>
+        <p>Proyecto Acad&eacute;mico | Grupo: 6205 | <cite>Fuente: Direcci&oacute;n General CONALEP</cite></p>
     </footer>
 
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnAnalizar = document.getElementById('btn-analizar');
+            const cardJs = document.getElementById('card-js');
+            const salidaArreglo = document.getElementById('salida-arreglo');
+
+            // --- FUNCIÓN REQUERIDA: PROCESAMIENTO DE ARREGLOS DE DATOS ---
+            const gestionarCatalogoEventos = () => {
+                // Declaración de una estructura de matriz técnica (Arreglo Multidimensional)
+                const catalogoEventos = [
+                    { id: 101, nombre: "Feria de Robótica", tipo: "Académico", cupo: 120 },
+                    { id: 102, nombre: "Intercolegial de Fútbol", tipo: "Deportivo", cupo: 250 }
+                ];
+
+                // Formateo del objeto JSON a una cadena legible para el elemento de pantalla
+                const datosFormateados = JSON.stringify(catalogoEventos, null, 2);
+                
+                // Imprimir en el contenedor estructural y mostrar el elemento oculto
+                salidaArreglo.textContent = datosFormateados;
+                cardJs.style.display = 'block';
+
+                // Animación de entrada fluida para la sección técnica
+                cardJs.animate([
+                    { opacity: 0, transform: 'translateY(10px)' },
+                    { opacity: 1, transform: 'translateY(0)' }
+                ], { duration: 200, easing: 'ease-out' });
+            };
+
+            // Enlace seguro del evento click (Eliminando la dependencia del atributo inline 'onclick')
+            btnAnalizar.addEventListener('click', gestionarCatalogoEventos);
+        });
+    </script>
 </body>
 </html>
