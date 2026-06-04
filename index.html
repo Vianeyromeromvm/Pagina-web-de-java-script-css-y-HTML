@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventos CONALEP | Portal Dinámico Moderno</title>
+    <title>Eventos CONALEP | Portal Din&aacute;mico Moderno</title>
     
     <style>
         /* --- VARIABLES DE DISEÑO MODERNO (DESIGN SYSTEM) --- */
@@ -59,6 +59,7 @@
             margin: 0;
             font-size: 1rem;
             color: #b2dfdb;
+            line-height: 1.5;
         }
         .header-logo img {
             border-radius: var(--radius);
@@ -175,7 +176,7 @@
             color: var(--text-muted);
         }
 
-        /* --- TRIVIA INTERACTIVA REINVENTADA --- */
+        /* --- TRIVIA INTERACTIVA --- */
         .contenedor-trivia {
             background: linear-gradient(145deg, #ffffff, #f1f8e9);
             border: 1px solid #d0e7b5;
@@ -211,7 +212,7 @@
         .btn-trivia:disabled {
             cursor: not-allowed;
         }
-        /* Clases de estado modernas */
+        /* Clases de estado dinámico */
         .btn-trivia.correct {
             background-color: #e8f5e9 !important;
             border-color: var(--accent) !important;
@@ -225,8 +226,8 @@
         
         #feedback-trivia {
             margin-top: 20px;
-            padding: 12px;
-            border-radius: 6px;
+            padding: 14px;
+            border-radius: 8px;
             font-weight: 600;
             text-align: center;
         }
@@ -246,7 +247,7 @@
             background-color: #263238;
         }
 
-        /* --- TOAST SYSTEM (NOTIFICACIONES DINÁMICAS) --- */
+        /* --- TOAST SYSTEM --- */
         #toast-container {
             position: fixed;
             bottom: 20px;
@@ -289,7 +290,7 @@
 
     <noscript>
         <div style="background-color: #ffcccc; color: #cc0000; padding: 15px; text-align: center; font-weight: bold;">
-            Atención: El motor de JavaScript está deshabilitado. Active los scripts para ver las funciones interactivas del CONALEP.
+            Atenci&oacute;n: El motor de JavaScript est&aacute; deshabilitado. Active los scripts para ver las funciones interactivas.
         </div>
     </noscript>
 
@@ -301,7 +302,7 @@
                 <h1>Portal de Eventos Institucionales</h1>
                 <p>
                     <strong>Grupo:</strong> 6205 <br>
-                    <strong>Módulo:</strong> <dfn>DEWE-20</dfn> | <strong>Docente:</strong> Rogelio Sánchez López
+                    <strong>M&oacute;dulo:</strong> <dfn>DEWE-20</dfn> | <strong>Docente:</strong> Rogelio S&aacute;nchez L&oacute;pez
                 </p>
             </div>
             <div class="header-logo">
@@ -315,7 +316,7 @@
 
     <div class="banner-dinamico">
         <button type="button" class="btn-banner" id="btn-anterior">&#9664; Anterior</button>
-        <span id="textoBanner"><strong>AVISO:</strong> INSCRIPCIONES ABIERTAS PARA EL INTERCOLEGIAL DE FÚTBOL &#9917;</span>
+        <span id="textoBanner"><strong>AVISO:</strong> INSCRIPCIONES ABIERTAS PARA EL INTERCOLEGIAL DE F&Uacute;TBOL &#9917;</span>
         <button type="button" class="btn-banner" id="btn-siguiente">Siguiente &#9654;</button>
     </div>
 
@@ -323,7 +324,7 @@
         <div class="nav-links">
             <span class="active">INICIO</span>
             <a href="eventos.html">EVENTOS</a>
-            <a href="galeria.html">GALERÍA</a>
+            <a href="galeria.html">GALER&Iacute;A</a>
             <a href="contacto.html">CONTACTO</a>
             <a href="enviar.html">RECOMENDAR</a>
             <a href="mapa.html">MAPA DEL SITIO</a>
@@ -334,16 +335,16 @@
         <section class="card">
             <h2>Bienvenida a la Comunidad Estudiantil</h2>
             <p class="introduccion">
-                En la actualidad, las aplicaciones web dinámicas permiten una mejor gestión institucional. Este portal escolar integra herramientas avanzadas de HTML, CSS y control de vanguardia lógica en JavaScript.
+                En la actualidad, las aplicaciones web din&aacute;micas permiten una mejor gesti&oacute;n institucional. Este portal escolar integra herramientas avanzadas de HTML, CSS y control de vanguardia l&oacute;gica en JavaScript.
             </p>
             <blockquote cite="https://www.conalep.edu.mx">
-                "Formación técnica para un futuro tecnológico integral."
+                "Formaci&oacute;n t&eacute;cnica para un futuro tecnol&oacute;gico integral."
             </blockquote>
         </section>
 
         <section class="card contenedor-trivia">
-            <h3>&#129504; Trivia Interactiva: DEWE-20</h3>
-            <p>¿Qué etiqueta se requiere para mostrar un mensaje alternativo si el navegador del usuario no tiene activo o no soporta JavaScript?</p>
+            <h3>&#129504; Trivia Interactive: DEWE-20</h3>
+            <p>&iquest;Qu&eacute; etiqueta se requiere para mostrar un mensaje alternativo si el navegador del usuario no tiene activo o no soporta JavaScript?</p>
             
             <div class="grupo-botones-trivia">
                 <button type="button" class="btn-trivia" data-correct="false">&lt;script&gt;</button>
@@ -357,7 +358,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026. <cite>Proyecto Académico CONALEP</cite></p>
+        <p>&copy; 2026. <cite>Proyecto Acad&eacute;mico CONALEP</cite></p>
         <p><a href="#" id="btn-imprimir" class="btn-print">[Imprimir Reporte de Inicio]</a></p>
     </footer>
 
@@ -365,7 +366,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             
             // ==========================================
-            // SISTEMA DE TOASTS (Notificaciones emergentes)
+            // SISTEMA DE TOASTS
             // ==========================================
             const showToast = (message) => {
                 const container = document.getElementById('toast-container');
@@ -374,7 +375,6 @@
                 toast.textContent = message;
                 container.appendChild(toast);
 
-                // Animación moderna con Web Animations API
                 toast.animate([
                     { transform: 'translateY(20px)', opacity: 0 },
                     { transform: 'translateY(0)', opacity: 1 }
@@ -386,18 +386,17 @@
                 }, 3000);
             };
 
-            // Notificación inicial de bienvenida
             showToast('¡Bienvenido al portal dinámico CONALEP!');
 
             // ==========================================
-            // CORRECCIÓN Y MODERNIZACIÓN DEL BANNER
+            // CONTROL DEL BANNER DE AVISOS
             // ==========================================
             class Banner {
                 constructor() {
                     this.avisos = [
-                        "<strong>AVISO:</strong> INSCRIPCIONES ABIERTAS PARA EL INTERCOLEGIAL DE FÚTBOL &#9917;",
+                        "<strong>AVISO:</strong> INSCRIPCIONES ABIERTAS PARA EL INTERCOLEGIAL DE F&Uacute;TBOL &#9917;",
                         "<strong>CONFERENCIA:</strong> Desarrollo Web Moderno este Viernes a las 11:00 AM. &#128187;",
-                        "<strong>RECORDATORIO:</strong> Entrega de evaluaciones próxima semana. &#128221;"
+                        "<strong>RECORDATORIO:</strong> Entrega de evaluaciones pr&oacute;xima semana. &#128221;"
                     ];
                     this.index = 0;
                     this.el = document.getElementById('textoBanner');
@@ -412,13 +411,11 @@
                 }
 
                 async render() {
-                    // Animación moderna de salida
                     const outAnim = this.el.animate([{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(0.98)' }], { duration: 150 });
                     await outAnim.finished;
 
                     this.el.innerHTML = this.avisos[this.index];
 
-                    // Animación moderna de entrada
                     this.el.animate([{ opacity: 0, transform: 'scale(1.02)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 200, easing: 'ease-out' });
                 }
 
@@ -443,7 +440,7 @@
             new Banner();
 
             // ==========================================
-            // MODERNIZACIÓN DE LA TRIVIA INTERACTIVA
+            // CONTROL DE LA TRIVIA INTERACTIVA
             // ==========================================
             const btnsTrivia = document.querySelectorAll('.btn-trivia');
             const feedback = document.getElementById('feedback-trivia');
@@ -451,23 +448,26 @@
 
             btnsTrivia.forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    const isCorrect = e.target.dataset.correct === 'true';
+                    // Asegurar la captura correcta del botón objetivo
+                    const targetBtn = e.currentTarget;
+                    const isCorrect = targetBtn.dataset.correct === 'true';
                     
+                    // Bloquear los demás botones
                     btnsTrivia.forEach(b => b.disabled = true);
 
                     if (isCorrect) {
-                        e.target.classList.add('correct');
+                        targetBtn.classList.add('correct');
                         feedback.style.backgroundColor = '#e8f5e9';
                         feedback.style.color = '#2e7d32';
-                        feedback.innerHTML = '&#10004; ¡Excelente! La etiqueta &lt;noscript&gt; es la correcta.';
+                        feedback.innerHTML = '&#10004; &iexcl;Excelente! La etiqueta &lt;noscript&gt; es la correcta.';
                         showToast('¡Respuesta Correcta! ');
                     } else {
-                        e.target.classList.add('incorrect');
+                        targetBtn.classList.add('incorrect');
                         feedback.style.backgroundColor = '#ffebee';
                         feedback.style.color = '#c62828';
-                        feedback.innerHTML = '&#10060; Incorrecto. Inténtalo de nuevo.';
+                        feedback.innerHTML = '&#10060; Incorrecto. Int&eacute;ntalo de nuevo.';
                         
-                        // Resalta la correcta automáticamente
+                        // Resalta la opción que era correcta
                         btnsTrivia.forEach(b => {
                             if(b.dataset.correct === 'true') b.classList.add('correct');
                         });
@@ -486,7 +486,7 @@
                 btnReset.style.display = 'none';
             });
 
-            // Imprimir
+            // Imprimir reporte nativo
             document.getElementById('btn-imprimir').addEventListener('click', (e) => {
                 e.preventDefault();
                 window.print();
