@@ -4,11 +4,213 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería de Eventos | CONALEP</title>
-    <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="script.js"></script>
+    
     <style>
+        /* --- VARIABLES DE DISEÑO MODERNO (DESIGN SYSTEM UNIFICADO) --- */
+        :root {
+            --primary: #004d40;
+            --primary-light: #00796b;
+            --primary-dark: #00251a;
+            --secondary: #37474f;
+            --bg-main: #f4f6f8;
+            --bg-card: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #607d8b;
+            --radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-main);
+        }
+
+        /* --- HEADER MODERNO --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 24px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        header h3 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .btn-home {
+            color: #b2dfdb;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 1px solid rgba(178, 223, 219, 0.3);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .btn-home:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
         main {
-            padding: 40px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+            box-sizing: border-box;
+        }
+
+        .intro-galeria {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            background-color: #e0f2f1;
+            padding: 16px 20px;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin-bottom: 35px;
+        }
+
+        .titulo-seccion {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* --- CUADRÍCULA DE GALERÍA MODERNA (CSS GRID) --- */
+        .grid-galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .tarjeta-galeria {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.03);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .tarjeta-galeria:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        /* Contenedor de imagen para mantener proporción perfecta */
+        .wrapper-img {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background-color: #eaeaea;
+        }
+        .wrapper-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .tarjeta-galeria:hover .wrapper-img img {
+            transform: scale(1.06);
+        }
+
+        .pie-foto {
+            padding: 16px;
+            margin: 0;
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            text-align: center;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        /* --- VISOR EN PANTALLA COMPLETA (LIGHTBOX DINÁMICO) --- */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 24, 27, 0.95);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .lightbox-img {
+            max-width: 85%;
+            max-height: 75%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .lightbox.active .lightbox-img {
+            transform: scale(1);
+        }
+        .lightbox-caption {
+            color: #ffffff;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #ffffff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            line-height: 1;
+            transition: var(--transition);
+        }
+        .lightbox-close:hover {
+            color: #b2dfdb;
+            transform: scale(1.1);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: #b2dfdb;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            font-size: 0.95rem;
+        }
+        footer abbr {
+            text-decoration: none;
+            border-bottom: 1px dashed #4db6ac;
+            color: #4db6ac;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -16,7 +218,7 @@
     
     <noscript>
         <div style="background-color: #ffcccc; color: #cc0000; padding: 15px; text-align: center; font-weight: bold;">
-            Active JavaScript para habilitar efectos visuales en el catálogo interactivo.
+            Active JavaScript para habilitar efectos visuales y el visor a pantalla completa de la galería.
         </div>
     </noscript>
 
@@ -31,33 +233,98 @@
 
     <main>
         <p class="intro-galeria">
-            Registro fotográfico de los eventos realizados anteriormente por la comunidad educativa. 
-            Cada imagen captura el esfuerzo y la dedicación de nuestros alumnos en su formación profesional técnica.
+            Registro fotográfico de los eventos realizados anteriormente por la comunidad educativa. Cada imagen captura el esfuerzo y la dedicación de nuestros alumnos en su formación profesional técnica.
         </p>
+
+        <div class="titulo-seccion">Memorias de Actividades Estudiantiles</div>
         
-        <table class="tabla-galeria">
-            <caption>Memorias de Actividades Estudiantiles</caption>
-            <tbody>
-                <tr>
-                    <td>
-                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=200" alt="Taller práctico" class="img-borde">
-                        <p class="pie-foto">Talleres de Innovación</p>
-                    </td>
-                    <td>
-                        <img src="https://images.unsplash.com/photo-1511629091441-ee46146481b6?w=200" alt="Graduación" class="img-borde">
-                        <p class="pie-foto">Ceremonia de Egresados</p>
-                    </td>
-                    <td>
-                        <img src="https://images.unsplash.com/photo-1544531585-9847b68c8c86?w=200" alt="Concurso" class="img-borde">
-                        <p class="pie-foto">Concurso de Oratoria</p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- Reemplazo de la tabla por CSS Grid moderno -->
+        <div class="grid-galeria">
+            <div class="tarjeta-galeria" data-full="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800">
+                <div class="wrapper-img">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400" alt="Talleres de Innovación">
+                </div>
+                <p class="pie-foto">Talleres de Innovación</p>
+            </div>
+
+            <div class="tarjeta-galeria" data-full="https://images.unsplash.com/photo-1511629091441-ee46146481b6?w=800">
+                <div class="wrapper-img">
+                    <img src="https://images.unsplash.com/photo-1511629091441-ee46146481b6?w=400" alt="Ceremonia de Egresados">
+                </div>
+                <p class="pie-foto">Ceremonia de Egresados</p>
+            </div>
+
+            <div class="tarjeta-galeria" data-full="https://images.unsplash.com/photo-1544531585-9847b68c8c86?w=800">
+                <div class="wrapper-img">
+                    <img src="https://images.unsplash.com/photo-1544531585-9847b68c8c86?w=400" alt="Concurso de Oratoria">
+                </div>
+                <p class="pie-foto">Concurso de Oratoria</p>
+            </div>
+        </div>
     </main>
+
+    <!-- COMPONENTE FLOTANTE LIGHTBOX INTERACTIVO (JS) -->
+    <div id="custom-lightbox" class="lightbox">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">&times;</button>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="Vista ampliada">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
 
     <footer>
         <p>Vianney Romero García | Grupo 6205 | <abbr title="Colegio Nacional de Educación Profesional Técnica">CONALEP</abbr></p>
     </footer>
+
+    <!-- INTERACTIVIDAD CON JAVASCRIPT MODERNO -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const tarjetas = document.querySelectorAll('.tarjeta-galeria');
+            const lightbox = document.getElementById('custom-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const btnClose = document.getElementById('lightbox-close');
+
+            // --- ABRIR VISOR (LIGHTBOX) ---
+            tarjetas.forEach(tarjeta => {
+                tarjeta.addEventListener('click', () => {
+                    const urlAltaResolucion = tarjeta.getAttribute('data-full');
+                    const textoPie = tarjeta.querySelector('.pie-foto').textContent;
+                    const altTexto = tarjeta.querySelector('img').getAttribute('alt');
+
+                    // Asignar recursos al visor antes de mostrarlo
+                    lightboxImg.src = urlAltaResolucion;
+                    lightboxImg.alt = altTexto;
+                    lightboxCaption.textContent = textoPie;
+
+                    // Activar clase CSS para animación
+                    lightbox.classList.add('active');
+                });
+            });
+
+            // --- CERRAR VISOR ---
+            const cerrarLightbox = () => {
+                lightbox.classList.remove('active');
+                // Limpiar src al terminar la animación para ahorrar memoria de red
+                setTimeout(() => {
+                    lightboxImg.src = "";
+                }, 300);
+            };
+
+            btnClose.addEventListener('click', cerrarLightbox);
+
+            // Cerrar también si el usuario hace clic fuera de la foto (en el fondo oscuro)
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    cerrarLightbox();
+                }
+            });
+
+            // Soporte de accesibilidad: Cerrar presionando la tecla Escape (Esc)
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    cerrarLightbox();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

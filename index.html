@@ -3,47 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventos CONALEP | Inicio Din√°mico</title>
-    <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="script.js"></script>
+    <title>Eventos CONALEP | Portal Din·mico Moderno</title>
+    
     <style>
-        .banner-dinamico {
-            background-color: #fff3cd;
-            border: 2px solid #ffeeba;
-            color: #856404;
-            padding: 15px;
-            margin: 15px auto;
-            text-align: center;
-            max-width: 1200px;
-            border-radius: 6px;
+        /* --- VARIABLES DE DISE—O MODERNO (DESIGN SYSTEM) --- */
+        :root {
+            --primary: #004d40;
+            --primary-light: #00796b;
+            --primary-dark: #00251a;
+            --secondary: #37474f;
+            --accent: #2e7d32;
+            --accent-danger: #c62828;
+            --bg-main: #f4f6f8;
+            --bg-card: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #607d8b;
+            --radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-main);
+        }
+
+        /* --- HEADER MODERNO --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 24px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        .header-datos h1 {
+            margin: 0 0 8px 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .header-datos p {
+            margin: 0;
+            font-size: 1rem;
+            color: #b2dfdb;
+        }
+        .header-logo img {
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            object-fit: cover;
+        }
+        
+        /* --- NAVEGACI”N ESTILO TABS --- */
+        nav {
+            background-color: var(--secondary);
+            padding: 4px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-links {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .nav-links a, .nav-links .active {
+            color: #cfd8dc;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .nav-links .active {
+            background-color: var(--primary-light);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        /* --- BANNER DIN¡MICO TIPO MARQUESINA INTELIGENTE --- */
+        .banner-dinamico {
+            background: #fff9e6;
+            border-left: 5px solid #ffb300;
+            color: #5d4037;
+            padding: 16px 24px;
+            margin: 24px auto;
+            max-width: 1200px;
+            border-radius: var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            box-sizing: border-box;
+        }
+        #textoBanner {
+            font-size: 1.1rem;
+            font-weight: 500;
+            will-change: transform, opacity;
         }
         .btn-banner {
-            background-color: #856404;
-            color: white;
-            border: none;
-            padding: 5px 12px;
+            background-color: transparent;
+            color: #5d4037;
+            border: 1px solid rgba(93, 64, 55, 0.2);
+            padding: 10px 18px;
             cursor: pointer;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-        .contenedor-trivia {
-            background-color: #e2f0d9;
-            border: 2px solid #385723;
-            padding: 20px;
             border-radius: 8px;
-            margin-top: 30px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+        .btn-banner:hover {
+            background-color: #ffb300;
+            color: var(--primary-dark);
+            border-color: transparent;
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+        }
+        @media (max-width: 900px) {
+            main { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            padding: 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .introduccion {
+            font-size: 1.15rem;
+            color: var(--text-main);
+            line-height: 1.8;
+        }
+        blockquote {
+            background-color: var(--bg-main);
+            border-left: 4px solid var(--primary-light);
+            margin: 24px 0 0 0;
+            padding: 20px;
+            font-style: italic;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            color: var(--text-muted);
+        }
+
+        /* --- TRIVIA INTERACTIVA REINVENTADA --- */
+        .contenedor-trivia {
+            background: linear-gradient(145deg, #ffffff, #f1f8e9);
+            border: 1px solid #d0e7b5;
+        }
+        .contenedor-trivia h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: #2e7d32;
+        }
+        .grupo-botones-trivia {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
         }
         .btn-trivia {
-            padding: 8px 15px;
-            margin: 5px;
-            border: 1px solid #ccc;
+            padding: 14px 20px;
+            border: 2px solid #c8e6c9;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 8px;
             background-color: white;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: left;
+            transition: var(--transition);
+        }
+        .btn-trivia:hover:not(:disabled) {
+            background-color: #f1f8e9;
+            border-color: #81c784;
+            transform: translateX(5px);
+        }
+        .btn-trivia:disabled {
+            cursor: not-allowed;
+        }
+        /* Clases de estado modernas */
+        .btn-trivia.correct {
+            background-color: #e8f5e9 !important;
+            border-color: var(--accent) !important;
+            color: var(--accent) !important;
+        }
+        .btn-trivia.incorrect {
+            background-color: #ffebee !important;
+            border-color: var(--accent-danger) !important;
+            color: var(--accent-danger) !important;
+        }
+        
+        #feedback-trivia {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .btn-reiniciar {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
             font-weight: bold;
+            margin-top: 15px;
+            transition: var(--transition);
+        }
+        .btn-reiniciar:hover {
+            background-color: #263238;
+        }
+
+        /* --- TOAST SYSTEM (NOTIFICACIONES DIN¡MICAS) --- */
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .toast {
+            background-color: #323232;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: #b2dfdb;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            font-size: 0.95rem;
+        }
+        footer a {
+            color: #4db6ac;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -51,17 +289,19 @@
 
     <noscript>
         <div style="background-color: #ffcccc; color: #cc0000; padding: 15px; text-align: center; font-weight: bold;">
-            Atenci√≥n: El motor de JavaScript est√° deshabilitado. Active los scripts para ver las funciones interactivas del CONALEP.
+            AtenciÛn: El motor de JavaScript est· deshabilitado. Active los scripts para ver las funciones interactivas del CONALEP.
         </div>
     </noscript>
+
+    <div id="toast-container"></div>
 
     <header>
         <div class="header-container">
             <div class="header-datos">
                 <h1>Portal de Eventos Institucionales</h1>
                 <p>
-                    <strong>Alumno:</strong> Vianney Romero Garc√≠a &nbsp;&nbsp; <strong>Grupo:</strong> 6205 <br>
-                    <strong>M√≥dulo:</strong> <dfn>DEWE-20</dfn> | <strong>Docente:</strong> Rogelio S√°nchez L√≥pez
+                    <strong>Grupo:</strong> 6205 <br>
+                    <strong>MÛdulo:</strong> <dfn>DEWE-20</dfn> | <strong>Docente:</strong> Rogelio S·nchez LÛpez
                 </p>
             </div>
             <div class="header-logo">
@@ -74,48 +314,184 @@
     </header>
 
     <div class="banner-dinamico">
-        <button type="button" class="btn-banner" onclick="rotarAviso('anterior')">‚óÄ Anterior</button>
-        <span id="textoBanner"><strong>AVISO:</strong> INSCRIPCIONES ABIERTAS PARA EL INTERCOLEGIAL DE F√öTBOL ‚öΩ</span>
-        <button type="button" class="btn-banner" onclick="rotarAviso('siguiente')">Siguiente ‚ñ∂</button>
+        <button type="button" class="btn-banner" id="btn-anterior">&#9664; Anterior</button>
+        <span id="textoBanner"><strong>AVISO:</strong> INSCRIPCIONES ABIERTAS PARA EL INTERCOLEGIAL DE F⁄TBOL &#9917;</span>
+        <button type="button" class="btn-banner" id="btn-siguiente">Siguiente &#9654;</button>
     </div>
 
     <nav>
         <div class="nav-links">
-            <span class="active">INICIO</span> | 
-            <a href="eventos.html">EVENTOS</a> | 
-            <a href="galeria.html">GALER√çA</a> | 
-            <a href="contacto.html">CONTACTO</a> | 
-            <a href="enviar.html">RECOMENDAR</a> |
+            <span class="active">INICIO</span>
+            <a href="eventos.html">EVENTOS</a>
+            <a href="galeria.html">GALERÕA</a>
+            <a href="contacto.html">CONTACTO</a>
+            <a href="enviar.html">RECOMENDAR</a>
             <a href="mapa.html">MAPA DEL SITIO</a>
         </div>
     </nav>
 
     <main>
-        <section>
+        <section class="card">
             <h2>Bienvenida a la Comunidad Estudiantil</h2>
             <p class="introduccion">
-                En la actualidad, las aplicaciones web din√°micas permiten una mejor gesti√≥n institucional. Este portal escolar integra herramientas avanzadas de HTML, CSS y control l√≥gico en JavaScript.
+                En la actualidad, las aplicaciones web din·micas permiten una mejor gestiÛn institucional. Este portal escolar integra herramientas avanzadas de HTML, CSS y control de vanguardia lÛgica en JavaScript.
             </p>
             <blockquote cite="https://www.conalep.edu.mx">
-                "Formaci√≥n t√©cnica para un futuro tecnol√≥gico integral."
+                "FormaciÛn tÈcnica para un futuro tecnolÛgico integral."
             </blockquote>
         </section>
 
-        <section class="contenedor-trivia">
-            <h3>üß† Trivia Interactiva del M√≥dulo DEWE-20</h3>
-            <p>¬øQu√© etiqueta se requiere para mostrar un mensaje alternativo si el navegador del usuario no tiene activo o no soporta JavaScript?</p>
-            <div style="margin-top: 10px;">
-                <button type="button" class="btn-trivia" onclick="evaluarRespuesta(this, false)">&lt;script&gt;</button>
-                <button type="button" class="btn-trivia" onclick="evaluarRespuesta(this, true)">&lt;noscript&gt;</button>
-                <button type="button" class="btn-trivia" onclick="evaluarRespuesta(this, false)">&lt;div&gt;</button>
+        <section class="card contenedor-trivia">
+            <h3>&#129504; Trivia Interactiva: DEWE-20</h3>
+            <p>øQuÈ etiqueta se requiere para mostrar un mensaje alternativo si el navegador del usuario no tiene activo o no soporta JavaScript?</p>
+            
+            <div class="grupo-botones-trivia">
+                <button type="button" class="btn-trivia" data-correct="false">&lt;script&gt;</button>
+                <button type="button" class="btn-trivia" data-correct="true">&lt;noscript&gt;</button>
+                <button type="button" class="btn-trivia" data-correct="false">&lt;div&gt;</button>
             </div>
+            
+            <div id="feedback-trivia"></div>
+            <button type="button" id="btn-reiniciar-trivia" class="btn-reiniciar" style="display: none;">Intentar de nuevo</button>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Vianney Romero Garc√≠a. <cite>Proyecto Acad√©mico CONALEP</cite></p>
-        <p><a href="javascript:window.print()" class="btn-print">[Imprimir Reporte de Inicio]</a></p>
+        <p>&copy; 2026. <cite>Proyecto AcadÈmico CONALEP</cite></p>
+        <p><a href="#" id="btn-imprimir" class="btn-print">[Imprimir Reporte de Inicio]</a></p>
     </footer>
 
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // ==========================================
+            // SISTEMA DE TOASTS (Notificaciones emergentes)
+            // ==========================================
+            const showToast = (message) => {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+                container.appendChild(toast);
+
+                // AnimaciÛn moderna con Web Animations API
+                toast.animate([
+                    { transform: 'translateY(20px)', opacity: 0 },
+                    { transform: 'translateY(0)', opacity: 1 }
+                ], { duration: 300, easing: 'ease-out' });
+
+                setTimeout(() => {
+                    toast.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300 })
+                        .onfinish = () => toast.remove();
+                }, 3000);
+            };
+
+            // NotificaciÛn inicial de bienvenida
+            showToast('°Bienvenido al portal din·mico CONALEP!');
+
+            // ==========================================
+            // CORRECCI”N Y MODERNIZACI”N DEL BANNER
+            // ==========================================
+            class Banner {
+                constructor() {
+                    this.avisos = [
+                        "<strong>AVISO:</strong> INSCRIPCIONES ABIERTAS PARA EL INTERCOLEGIAL DE F⁄TBOL &#9917;",
+                        "<strong>CONFERENCIA:</strong> Desarrollo Web Moderno este Viernes a las 11:00 AM. &#128187;",
+                        "<strong>RECORDATORIO:</strong> Entrega de evaluaciones prÛxima semana. &#128221;"
+                    ];
+                    this.index = 0;
+                    this.el = document.getElementById('textoBanner');
+                    this.timer = null;
+                    this.init();
+                }
+
+                init() {
+                    document.getElementById('btn-anterior').addEventListener('click', () => this.rotate('prev'));
+                    document.getElementById('btn-siguiente').addEventListener('click', () => this.rotate('next'));
+                    this.startAuto();
+                }
+
+                async render() {
+                    // AnimaciÛn moderna de salida
+                    const outAnim = this.el.animate([{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(0.98)' }], { duration: 150 });
+                    await outAnim.finished;
+
+                    this.el.innerHTML = this.avisos[this.index];
+
+                    // AnimaciÛn moderna de entrada
+                    this.el.animate([{ opacity: 0, transform: 'scale(1.02)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 200, easing: 'ease-out' });
+                }
+
+                rotate(dir) {
+                    clearInterval(this.timer);
+                    if (dir === 'next') {
+                        this.index = (this.index + 1) % this.avisos.length;
+                    } else {
+                        this.index = (this.index - 1 + this.avisos.length) % this.avisos.length;
+                    }
+                    this.render();
+                    this.startAuto();
+                }
+
+                startAuto() {
+                    this.timer = setInterval(() => {
+                        this.index = (this.index + 1) % this.avisos.length;
+                        this.render();
+                    }, 6000);
+                }
+            }
+            new Banner();
+
+            // ==========================================
+            // MODERNIZACI”N DE LA TRIVIA INTERACTIVA
+            // ==========================================
+            const btnsTrivia = document.querySelectorAll('.btn-trivia');
+            const feedback = document.getElementById('feedback-trivia');
+            const btnReset = document.getElementById('btn-reiniciar-trivia');
+
+            btnsTrivia.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const isCorrect = e.target.dataset.correct === 'true';
+                    
+                    btnsTrivia.forEach(b => b.disabled = true);
+
+                    if (isCorrect) {
+                        e.target.classList.add('correct');
+                        feedback.style.backgroundColor = '#e8f5e9';
+                        feedback.style.color = '#2e7d32';
+                        feedback.innerHTML = '&#10004; °Excelente! La etiqueta &lt;noscript&gt; es la correcta.';
+                        showToast('°Respuesta Correcta! ');
+                    } else {
+                        e.target.classList.add('incorrect');
+                        feedback.style.backgroundColor = '#ffebee';
+                        feedback.style.color = '#c62828';
+                        feedback.innerHTML = '&#10060; Incorrecto. IntÈntalo de nuevo.';
+                        
+                        // Resalta la correcta autom·ticamente
+                        btnsTrivia.forEach(b => {
+                            if(b.dataset.correct === 'true') b.classList.add('correct');
+                        });
+                    }
+                    btnReset.style.display = 'block';
+                });
+            });
+
+            btnReset.addEventListener('click', () => {
+                btnsTrivia.forEach(b => {
+                    b.disabled = false;
+                    b.classList.remove('correct', 'incorrect');
+                });
+                feedback.innerHTML = '';
+                feedback.style.backgroundColor = 'transparent';
+                btnReset.style.display = 'none';
+            });
+
+            // Imprimir
+            document.getElementById('btn-imprimir').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.print();
+            });
+        });
+    </script>
 </body>
 </html>

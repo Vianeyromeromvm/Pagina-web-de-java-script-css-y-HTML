@@ -4,68 +4,380 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mapa del Sitio | CONALEP</title>
-    <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="script.js"></script>
+    
     <style>
+        /* --- VARIABLES DE DISEÑO MODERNO (DESIGN SYSTEM UNIFICADO) --- */
+        :root {
+            --primary: #004d40;
+            --primary-light: #00796b;
+            --primary-dark: #00251a;
+            --secondary: #37474f;
+            --accent: #2e7d32;
+            --bg-main: #f4f6f8;
+            --bg-card: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #607d8b;
+            --radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-main);
+        }
+
+        /* --- HEADER MODERNO --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 24px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .btn-nav {
+            color: #b2dfdb;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 1px solid rgba(178, 223, 219, 0.3);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .btn-nav:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* --- CONTENIDO PRINCIPAL EN DASHBOARD --- */
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 32px;
+            box-sizing: border-box;
+        }
+        @media (max-width: 850px) {
+            main { grid-template-columns: 1fr; margin: 20px auto; }
+        }
+
+        .seccion-texto {
+            grid-column: 1 / -1;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            background-color: #e0f2f1;
+            padding: 16px 20px;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin-bottom: 8px;
+        }
+        .seccion-texto code {
+            background-color: rgba(0, 77, 64, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* --- MAPA JERÁRQUICO ESTILIZADO (ÁRBOL VISUAL) --- */
+        .card-mapa {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 35px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .mapa-jerarquia ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        .mapa-jerarquia > ul > li {
+            margin-bottom: 24px;
+        }
+        .mapa-jerarquia > ul > li > strong {
+            font-size: 1.15rem;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 4px;
+        }
+        .lista-vinetas {
+            padding-left: 16px !important;
+        }
+        .lista-vinetas li {
+            position: relative;
+            padding: 8px 0 8px 20px;
+            transition: var(--transition);
+        }
+        /* Líneas conectoras tipo árbol de archivos */
+        .lista-vinetas li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 18px;
+            width: 12px;
+            height: 1px;
+            background-color: #cbd5e1;
+        }
+        .lista-vinetas li::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background-color: #cbd5e1;
+        }
+        .lista-vinetas li:last-child::after {
+            height: 18px;
+        }
+        
+        /* Enlaces del mapa */
+        .mapa-item {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 6px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            display: inline-block;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .mapa-item:hover {
+            border-color: var(--primary-light);
+            background-color: #e0f2f1;
+            color: var(--primary-dark);
+            transform: translateX(3px);
+        }
+        .mapa-item.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* --- CONTENEDOR DE INSPECTOR DINÁMICO (JS) --- */
+        .seccion-lateral {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .card-inspector {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            border: 1px solid #e2e8f0;
+            min-height: 200px;
+            box-sizing: border-box;
+        }
+        .card-inspector h3 {
+            margin-top: 0;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            border-bottom: 2px dashed #cbd5e1;
+            padding-bottom: 8px;
+        }
+        #inspector-titulo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin: 10px 0;
+        }
+        #inspector-desc {
+            color: var(--text-main);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        .badge-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            background-color: #e2e8f0;
+            color: var(--secondary);
+        }
+
+        /* --- CONTENEDOR OBJETO EXTERNO --- */
         .contenedor-objeto {
-            margin: 20px auto;
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 16px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .contenedor-objeto iframe, .contenedor-objeto object {
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            width: 100%;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: #b2dfdb;
             text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            font-size: 0.95rem;
+        }
+        footer abbr {
+            text-decoration: none;
+            border-bottom: 1px dashed #4db6ac;
+            color: #4db6ac;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
+    <header>
+        <div class="header-container">
+            <h1>Mapa Estructural del Sitio Web</h1>
+            <nav><a href="index.html" class="btn-nav">Volver al Inicio</a></nav>
+        </div>
+    </header>
+
     <noscript>
         <div style="background-color: #ffcccc; color: #cc0000; padding: 15px; text-align: center; font-weight: bold;">
-            Estructura estática cargada. Active los scripts para soporte dinámico del mapa.
+            Estructura estática cargada. Active los scripts para soporte dinámico del mapa interactivo.
         </div>
     </noscript>
 
-    <header>
-        <p style="text-align: right;"><a href="index.html" class="btn-nav">Volver al Inicio</a></p>
-        <h1>Mapa Estructural del Sitio Web</h1>
-    </header>
-    
     <main>
         <section class="seccion-texto">
-            <p class="capital">
-                A continuación se presenta la jerarquía técnica de archivos para el proyecto <code>DEWE-20</code>. 
-                Esta estructura permite una navegación fluida y organizada para todos los usuarios del plantel.
+            <p>
+                A continuación se presenta la jerarquía técnica de archivos para el proyecto <code>DEWE-20</code>. Selecciona o pasa el cursor por cualquier elemento para inspeccionar sus metadatos y funciones correspondientes.
             </p>
         </section>
 
-        <nav class="mapa-jerarquia">
-            <ul>
-                <li><strong>Nivel Principal</strong>
-                    <ul class="lista-vinetas">
-                        <li><a href="index.html">Página de Inicio</a> (Información General y Bienvenida)</li>
-                    </ul>
-                </li>
-                <li><strong>Nivel Secundario</strong>
-                    <ul class="lista-vinetas">
-                        <li><a href="eventos.html">Eventos</a> (Calendario y Detalles de Actividades)</li>
-                        <li><a href="galeria.html">Galería</a> (Registro Fotográfico de Eventos)</li>
-                        <li><a href="contacto.html">Contacto</a> (Formulario de Consultas)</li>
-                        <li><a href="enviar.html">Enviar a un Amigo</a> (Función de Compartir)</li>
-                    </ul>
-                </li>
-                <li><strong>Documentación y Soporte</strong>
-                    <ul class="lista-vinetas">
-                        <li><a href="mapa.html" class="active">Mapa del Sitio</a> (Estructura Jerárquica Actual)</li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+        <section class="card-mapa">
+            <nav class="mapa-jerarquia">
+                <ul>
+                    <li><strong>Nivel Principal</strong>
+                        <ul class="lista-vinetas">
+                            <li>
+                                <a href="index.html" class="mapa-item" data-desc="Página principal del portal. Contiene la bienvenida a los alumnos, avisos dinámicos en carrusel y una trivia interactiva de autoevaluación." data-status="Optimizado con JS">index.html</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>Nivel Secundario</strong>
+                        <ul class="lista-vinetas">
+                            <li>
+                                <a href="eventos.html" class="mapa-item" data-desc="Sección de agenda institucional. Despliega el calendario oficial de actividades tecnológicas, deportivas y culturales." data-status="Estructura Base">eventos.html</a>
+                            </li>
+                            <li>
+                                <a href="galeria.html" class="mapa-item" data-desc="Repositorio visual. Muestra evidencias fotográficas de los proyectos del plantel organizados mediante layouts adaptables." data-status="Multimedia">galeria.html</a>
+                            </li>
+                            <li>
+                                <a href="contacto.html" class="mapa-item" data-desc="Formulario de atención a usuarios con validación avanzada de código postal mediante expresiones regulares en tiempo real." data-status="Validación Dinámica">contacto.html</a>
+                            </li>
+                            <li>
+                                <a href="enviar.html" class="mapa-item" data-desc="Herramienta de recomendación directa. Construye un enlace seguro de correo electrónico estructurando la información del remitente." data-status="Procesamiento Seguro">enviar.html</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>Documentación y Soporte</strong>
+                        <ul class="lista-vinetas">
+                            <li>
+                                <a href="mapa.html" class="mapa-item active" data-desc="Documento actual. Muestra la arquitectura y el árbol relacional de archivos del proyecto utilizando un inspector dinámico nativo." data-status="Visualización Activa">mapa.html</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </section>
 
-        <div class="contenedor-objeto">
-            <object data="https://www.gob.mx" width="90%" height="300">
-                <p>Tu navegador no soporta visualización de documentos externos.</p>
-            </object>
-        </div>
+        <section class="seccion-lateral">
+            <div class="card-inspector" id="inspector">
+                <h3>🔍 Inspector de Archivos</h3>
+                <div id="inspector-contenido">
+                    <p style="color: var(--text-muted); font-style: italic;">Pasa el cursor o selecciona un archivo del mapa para auditar sus metadatos.</p>
+                </div>
+            </div>
+
+            <div class="contenedor-objeto">
+                <iframe src="https://www.gob.mx" height="280" title="Soporte Institucional Gob"></iframe>
+            </div>
+        </section>
     </main>
 
     <footer>
-        <p>Alumno: Vianney Romero García | Grupo 6205 | <abbr title="Colegio Nacional de Educación Profesional Técnica">CONALEP</abbr></p>
+        <p>Estudiante: Vianney Romero García | Grupo 6205 | <abbr title="Colegio Nacional de Educación Profesional Técnica">CONALEP</abbr></p>
     </footer>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const itemsMapa = document.querySelectorAll('.mapa-item');
+            const contenedorContenido = document.getElementById('inspector-contenido');
+
+            // Función para actualizar el panel de detalles de forma moderna
+            const actualizarInspector = (elemento) => {
+                const nombreArchivo = elemento.textContent;
+                const descripcion = elemento.getAttribute('data-desc');
+                const estado = elemento.getAttribute('data-status');
+
+                // Inyección limpia de HTML estructural
+                contenedorContenido.innerHTML = `
+                    <div id="inspector-titulo">${nombreArchivo}</div>
+                    <p id="inspector-desc">${descripcion}</p>
+                    <div><span class="badge-status" style="background-color: #e0f2f1; color: var(--primary-light);">${estado}</span></div>
+                `;
+
+                // Animación fluida de entrada para los datos del inspector
+                contenedorContenido.animate([
+                    { opacity: 0, transform: 'scale(0.98)' },
+                    { opacity: 1, transform: 'scale(1)' }
+                ], { duration: 180, easing: 'ease-out' });
+            };
+
+            // Escuchadores de eventos para interacción fluida (Mouse y Teclado/Foco)
+            itemsMapa.forEach(item => {
+                // Actualiza al pasar el cursor
+                item.addEventListener('mouseenter', () => actualizarInspector(item));
+                
+                // Mantiene el soporte al dar clic
+                item.addEventListener('click', (e) => {
+                    // Si es el archivo actual (mapa.html), prevenimos que recargue la página en bucle
+                    if(item.classList.contains('active')) {
+                        e.preventDefault();
+                    }
+                    actualizarInspector(item);
+                });
+            });
+
+            // Mostrar por defecto los datos del archivo activo al cargar la página
+            const itemActivo = document.querySelector('.mapa-item.active');
+            if(itemActivo) {
+                actualizarInspector(itemActivo);
+            }
+        });
+    </script>
 </body>
 </html>

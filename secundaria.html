@@ -4,38 +4,347 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto | Eventos CONALEP</title>
-    <!-- Etiqueta LINK para CSS externo (Indicador 15%) -->
+    
     <link rel="stylesheet" href="styles.css">
-    <!-- Etiqueta STYLE para CSS interno (Indicador 15%) -->
     <style>
-        /* Estilo específico para el pie de página */
+        /* --- VARIABLES DE DISEÑO (DESIGN SYSTEM UNIFICADO) --- */
+        :root {
+            --primary: #004d40;
+            --primary-light: #00796b;
+            --primary-dark: #00251a;
+            --secondary: #37474f;
+            --accent: #2e7d32;
+            --accent-danger: #c62828;
+            --bg-main: #f4f6f8;
+            --bg-card: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #607d8b;
+            --radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- ESTILOS GENERALES Y MAQUETACIÓN --- */
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-main);
+        }
+
+        /* --- HEADER MODERNO --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 24px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .btn-nav {
+            color: #b2dfdb;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 1px solid rgba(178, 223, 219, 0.3);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .btn-nav:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* --- ESTRUCTURA EN DOS COLUMNAS (ESTILO DASHBOARD) --- */
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 32px;
+            box-sizing: border-box;
+        }
+        @media (max-width: 900px) {
+            main { grid-template-columns: 1fr; margin: 20px auto; }
+        }
+
+        /* Pseudo-elemento ::first-letter para emular Letra Capital requerida */
+        .capital-text {
+            grid-column: 1 / -1;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            background-color: #e0f2f1;
+            padding: 16px 20px;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin: 0 0 10px 0;
+        }
+        .capital-text::first-letter {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            float: left;
+            line-height: 1;
+            padding-right: 8px;
+        }
+
+        /* --- COMPONENTE FORMULARIO --- */
+        form {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        legend {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--secondary);
+        }
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.15);
+        }
+        
+        /* Control visual de estados de error */
+        .input-error {
+            border-color: var(--accent-danger) !important;
+            background-color: #fff5f5;
+        }
+        .error-mensaje {
+            color: var(--accent-danger);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: -4px;
+        }
+
+        .checkbox-container {
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .checkbox-container input {
+            width: auto;
+            transform: scale(1.15);
+            cursor: pointer;
+        }
+
+        .acciones {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .btn-submit {
+            flex: 2;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .btn-submit:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-1px);
+        }
+        .btn-as-link {
+            flex: 1;
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid #cbd5e1;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-as-link:hover {
+            background-color: #f1f5f9;
+            color: var(--text-main);
+        }
+
+        /* --- SECCIÓN INFORMATIVA LATERAL --- */
+        .seccion-lateral {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .seccion-lateral h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: var(--secondary);
+        }
+        .beneficios {
+            margin: 0;
+            padding-left: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+        }
+        .beneficios li {
+            font-weight: 600;
+            color: var(--primary-light);
+            list-style-type: '✓ ';
+        }
+
+        /* --- TABLA --- */
+        .tabla-info {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .tabla-info caption {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            text-align: left;
+        }
+        .tabla-info th {
+            background-color: var(--secondary);
+            color: white;
+            padding: 14px;
+            font-weight: 600;
+            text-align: left;
+        }
+        .tabla-info td {
+            padding: 14px;
+            border-bottom: 1px solid #edf2f7;
+            color: var(--text-main);
+        }
+        .tabla-info tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge.activo { background-color: #e8f5e9; color: var(--accent); }
+        .badge.receso { background-color: #ffebee; color: var(--accent-danger); }
+
+        /* --- SISTEMA DE NOTIFICACIONES TOAST --- */
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .toast {
+            background-color: #2d3748;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-weight: 500;
+        }
+
+        /* --- PIE DE PÁGINA --- */
         footer {
-            margin-top: 50px;
+            background-color: var(--primary-dark);
+            color: #b2dfdb;
             text-align: center;
-            font-size: 0.9em;
-            color: #666;
+            padding: 30px;
+            margin-top: 60px;
+            font-size: 0.95rem;
+        }
+        footer abbr {
+            text-decoration: none;
+            border-bottom: 1px dashed #4db6ac;
+            color: #4db6ac;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
+    <div id="toast-container"></div>
+
     <header>
-        <p style="text-align: right;"><a href="index.html" class="btn-nav">Volver al Inicio</a></p>
-        <h1>Contacto y Consultas</h1>
+        <div class="header-container">
+            <h1>Contacto y Consultas</h1>
+            <nav><a href="index.html" class="btn-nav">Volver al Inicio</a></nav>
+        </div>
     </header>
 
+    <noscript>
+        <div style="background-color: #ffcccc; color: #cc0000; padding: 15px; text-align: center; font-weight: bold;">
+            JavaScript ausente. El sistema dinámico de validaciones y envío avanzado está deshabilitado.
+        </div>
+    </noscript>
+
     <main>
-        <!-- Texto con Letra Capital (Uso de pseudo-elemento) -->
         <p class="capital-text">
-            Si tienes alguna duda sobre los procesos de inscripción a nuestros eventos deportivos, culturales o académicos, 
-            por favor utiliza el siguiente formulario. Nuestro equipo administrativo te responderá en un plazo máximo de 48 horas.
+            Si tienes alguna duda sobre los procesos de inscripción a nuestros eventos deportivos, culturales o académicos, por favor utiliza el siguiente formulario. Nuestro equipo administrativo te responderá en un plazo máximo de 48 horas.
         </p>
 
-        <form action="mailto:vromero@conalep.edu.mx" method="post" enctype="text/plain" name="form_contacto">
+        <form id="form-contacto" name="form_contacto">
             <fieldset>
                 <legend>Envíanos tus dudas</legend>
                 
-                <!-- Uso de DIVs para alinear elementos (Indicador Formularios) -->
                 <div class="form-group">
                     <label for="nom">Nombre Completo:</label>
                     <input type="text" id="nom" name="nombre" maxlength="50" required placeholder="Ej. Juan Pérez">
@@ -49,36 +358,38 @@
                 <div class="form-group">
                     <label for="interes">Interés principal:</label>
                     <select id="interes" name="interes">
-                        <option value="deportes">Deportes</option>
-                        <option value="cultura">Cultura</option>
-                        <option value="acad">Académico</option>
+                        <option value="Deportes">Deportes</option>
+                        <option value="Cultura">Cultura</option>
+                        <option value="Académico">Académico</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="msg">Mensaje:</label>
-                    <textarea id="msg" name="mensaje" rows="5"></textarea>
+                    <textarea id="msg" name="mensaje" rows="5" placeholder="Escribe aquí tu consulta..."></textarea>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group checkbox-container">
                     <input type="checkbox" id="terminos" name="terminos" checked> 
-                    <label style="display:inline;" for="terminos">Acepto recibir notificaciones.</label>
+                    <label for="terminos">Acepto recibir notificaciones institucionales.</label>
                 </div>
 
                 <div class="acciones">
-                    <input type="submit" value="Enviar Información" class="btn-submit">
-                    <input type="reset" value="Limpiar Formulario" class="btn-as-link"> <!-- Botón como enlace -->
+                    <button type="submit" class="btn-submit">Enviar Información</button>
+                    <button type="reset" id="btn-reset" class="btn-as-link">Limpiar Formulario</button>
                 </div>
             </fieldset>
         </form>
 
-        <section>
-            <h3>Detalles de Interés</h3>
-            <ul class="beneficios">
-                <li>Atención personalizada.</li>
-                <li>Trámites 100% digitales.</li>
-                <li>Soporte técnico 24/7.</li>
-            </ul>
+        <section class="seccion-lateral">
+            <div>
+                <h3>Detalles de Interés</h3>
+                <ul class="beneficios">
+                    <li>Atención personalizada.</li>
+                    <li>Trámites 100% digitales.</li>
+                    <li>Soporte técnico 24/7.</li>
+                </ul>
+            </div>
 
             <table class="tabla-info">
                 <caption>Disponibilidad de Atención</caption>
@@ -91,19 +402,19 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Coordinación Académica</td>
+                        <td><strong>Coordinación Académica</strong></td>
                         <td>08:00 - 14:00</td>
-                        <td>Activo</td>
+                        <td><span class="badge activo">Activo</span></td>
                     </tr>
                     <tr>
-                        <td>Servicios Escolares</td>
+                        <td><strong>Servicios Escolares</strong></td>
                         <td>10:00 - 18:00</td>
-                        <td>Activo</td>
+                        <td><span class="badge activo">Activo</span></td>
                     </tr>
                     <tr>
-                        <td>Actividades Extraescolares</td>
+                        <td><strong>Actividades Extraescolares</strong></td>
                         <td>14:00 - 20:00</td>
-                        <td>En receso</td>
+                        <td><span class="badge receso">En receso</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -111,8 +422,74 @@
     </main>
 
     <footer>
-        <p>Vianney Romero García | Grupo 6205 | <abbr title="Colegio Nacional de Educación Profesional Técnica">CONALEP</abbr></p>
+        <p>Proyecto Académico | Grupo 6205 | <abbr title="Colegio Nacional de Educación Profesional Técnica">CONALEP</abbr></p>
     </footer>
 
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('form-contacto');
+            const toastContainer = document.getElementById('toast-container');
+
+            // Notificación Toast dinámica de la interfaz
+            const emitirNotificacion = (msg) => {
+                toastContainer.innerHTML = '';
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = msg;
+                toastContainer.appendChild(toast);
+
+                toast.animate([
+                    { transform: 'translateY(20px)', opacity: 0 },
+                    { transform: 'translateY(0)', opacity: 1 }
+                ], { duration: 250, easing: 'ease-out' });
+
+                setTimeout(() => {
+                    toast.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 250 })
+                         .onfinish = () => toast.remove();
+                }, 4000);
+            };
+
+            // Escuchador para la limpieza de campos
+            document.getElementById('btn-reset').addEventListener('click', () => {
+                emitirNotificacion('Formulario restablecido correctamente.');
+            });
+
+            // Procesamiento seguro de los datos capturados
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); // Detiene la acción tosca nativa de mailto sin procesar
+
+                const nombre = document.getElementById('nom').value.trim();
+                const correo = document.getElementById('correo').value.trim();
+                const interes = document.getElementById('interes').value;
+                const mensaje = document.getElementById('msg').value.trim();
+                const recibeAlertas = document.getElementById('terminos').checked ? "SÍ" : "NO";
+
+                const correoDestinatarioBase = "vromero@conalep.edu.mx";
+
+                // Construcción limpia y profesional del cuerpo del correo electrónico
+                const asuntoCorreo = encodeURIComponent(`Consulta desde Portal Web [${interes}] - ${nombre}`);
+                
+                let cuerpoEstructurado = `Formulario de Contacto Institucional\n`;
+                cuerpoEstructurado += `------------------------------------\n`;
+                cuerpoEstructurado += `Remitente: ${nombre}\n`;
+                cuerpoEstructurado += `Correo electrónico: ${correo}\n`;
+                cuerpoEstructurado += `Categoría de Interés: ${interes}\n`;
+                cuerpoEstructurado += `Suscrito a Notificaciones: ${recibeAlertas}\n`;
+                cuerpoEstructurado += `------------------------------------\n\n`;
+                cuerpoEstructurado += `Mensaje o Consulta:\n"${mensaje || 'Sin detalles adicionales.'}"`;
+
+                const cuerpoFormateado = encodeURIComponent(cuerpoEstructurado);
+
+                // Ejecución e inyección dinámica segura de la URL mailto
+                const URL_Envio = `mailto:${correoDestinatarioBase}?subject=${asuntoCorreo}&body=${cuerpoFormateado}`;
+
+                emitirNotificacion('Abriendo cliente de mensajería para despachar la consulta... 📬');
+
+                setTimeout(() => {
+                    window.location.href = URL_Envio;
+                }, 800);
+            });
+        });
+    </script>
 </body>
 </html>

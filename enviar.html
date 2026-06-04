@@ -4,47 +4,265 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recomendar Actividad | CONALEP</title>
-    <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="script.js"></script>
+    
+    <style>
+        /* --- VARIABLES DE DISEÑO MODERNO --- */
+        :root {
+            --primary: #004d40;
+            --primary-light: #00796b;
+            --primary-dark: #00251a;
+            --secondary: #37474f;
+            --bg-main: #f4f6f8;
+            --bg-card: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #607d8b;
+            --radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-main);
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 24px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .btn-inicio {
+            color: #b2dfdb;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 1px solid rgba(178, 223, 219, 0.3);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .btn-inicio:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+        }
+        @media (max-width: 768px) {
+            main { grid-template-columns: 1fr; margin: 20px auto; }
+        }
+
+        /* --- FORMULARIO ESTILIZADO --- */
+        form {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        legend {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--secondary);
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.15);
+        }
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .btn-submit:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-1px);
+        }
+
+        /* --- TABLA MODERNA --- */
+        .seccion-tabla {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .tabla-eventos {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .tabla-eventos caption {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .tabla-eventos th {
+            background-color: var(--secondary);
+            color: white;
+            padding: 14px 18px;
+            font-weight: 600;
+            text-align: left;
+        }
+        .tabla-eventos td {
+            padding: 14px 18px;
+            border-bottom: 1px solid #edf2f7;
+            color: var(--text-main);
+        }
+        .tabla-eventos tr:last-child td {
+            border-bottom: none;
+        }
+        .tabla-eventos tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* --- TOAST / NOTIFICACIONES --- */
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .toast {
+            background-color: #2d3748;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-weight: 500;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: #b2dfdb;
+            text-align: center;
+            padding: 24px;
+            margin-top: 60px;
+        }
+        .enlace-boton {
+            color: #4db6ac;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .enlace-boton:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    
+
+    <div id="toast-container"></div>
+
     <header>
         <div class="header-container">
-            <h1>Compartir Actividades con un Amigo</h1>
+            <h1>Compartir Actividades</h1>
             <nav><a href="index.html" class="btn-inicio">Volver al Inicio</a></nav>
         </div>
     </header>
 
     <main>
-        <form action="mailto:vianney@correo.com" method="post" enctype="text/plain">
+        <!-- Se removieron los atributos directo en HTML para controlarlos de forma segura en JS -->
+        <form id="form-recomendar">
             <fieldset>
                 <legend>Recomendación Directa</legend>
                 
                 <div class="form-group">
                     <label for="remitente">Tu Nombre:</label>
-                    <input type="text" id="remitente" required>
+                    <input type="text" id="remitente" placeholder="Ej. Juan Pérez" required>
                 </div>
 
                 <div class="form-group">
                     <label for="destinatario">Correo de tu Compañero:</label>
-                    <input type="email" id="destinatario" required>
+                    <input type="email" id="destinatario" placeholder="compañero@correo.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="nota">Mensaje:</label>
-                    <textarea id="nota" rows="3"></textarea>
+                    <label for="nota">Mensaje personalizado (Opcional):</label>
+                    <textarea id="nota" rows="4" placeholder="¡Hola! Te recomiendo revisar las actividades del portal..."></textarea>
                 </div>
 
                 <div class="acciones">
-                    <input type="submit" value="Enviar Invitación" class="btn-submit">
+                    <button type="submit" class="btn-submit">Enviar Invitación por Correo</button>
                 </div>
             </fieldset>
         </form>
 
-        <section style="margin-top: 30px;">
+        <section class="seccion-tabla">
             <table class="tabla-eventos">
-                <caption>Horarios Base de las Actividades Compartidas</caption>
+                <caption>Horarios Base de las Actividades</caption>
                 <thead>
                     <tr>
                         <th>Clasificación</th>
@@ -53,11 +271,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Eventos de Tecnología de Mañana</td>
+                        <td><strong>Eventos de Tecnología de Mañana</strong></td>
                         <td>10:00 AM</td>
                     </tr>
                     <tr>
-                        <td>Muestras Culturales de Tarde</td>
+                        <td><strong>Muestras Culturales de Tarde</strong></td>
                         <td>04:00 PM</td>
                     </tr>
                 </tbody>
@@ -66,7 +284,68 @@
     </main>
 
     <footer>
-        <p style="text-align: center;"><a href="index.html" class="enlace-boton">Inicio</a></p>
+        <p>&copy; 2026. <cite>Proyecto Académico CONALEP</cite> | <a href="index.html" class="enlace-boton">Inicio</a></p>
     </footer>
+
+    <!-- LOGICA JAVASCRIPT MODERNA CON CONTROL DE ERRORES -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const formulario = document.getElementById('form-recomendar');
+            const toastContainer = document.getElementById('toast-container');
+
+            // Feedback visual elegante al usuario
+            const mostrarNotificacion = (mensaje) => {
+                toastContainer.innerHTML = ''; // Limpiar anteriores
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = mensaje;
+                toastContainer.appendChild(toast);
+
+                toast.animate([
+                    { transform: 'translateY(20px)', opacity: 0 },
+                    { transform: 'translateY(0)', opacity: 1 }
+                ], { duration: 250, easing: 'ease-out' });
+
+                setTimeout(() => {
+                    toast.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 250 })
+                         .onfinish = () => toast.remove();
+                }, 4000);
+            };
+
+            // Interceptar y procesar de manera inteligente el envío del formulario
+            formulario.addEventListener('submit', (evento) => {
+                evento.preventDefault(); // Evita que la página intente recargarse o romperse
+
+                // Captura y sanitización básica de valores
+                const nombreRemitente = document.getElementById('remitente').value.trim();
+                const correoDestino = document.getElementById('destinatario').value.trim();
+                const mensajeNota = document.getElementById('nota').value.trim();
+                
+                const correoSoporteFijo = "vianney@correo.com"; // Cuenta destino base original
+
+                // Crear dinámicamente un cuerpo de correo profesional estructurado
+                const asunto = encodeURIComponent(`Recomendación de Actividades CONALEP de parte de ${nombreRemitente}`);
+                
+                let cuerpoEstructurado = `¡Hola!\n\n${nombreRemitente} te ha recomendado visitar el Portal de Eventos Institucionales del CONALEP.\n\n`;
+                if(mensajeNota) {
+                    cuerpoEstructurado += `Mensaje adicional de ${nombreRemitente}:\n"${mensajeNota}"\n\n`;
+                }
+                cuerpoEstructurado += `No te pierdas los Eventos de Tecnología (10:00 AM) y Muestras Culturales (04:00 PM).\n\nSaludos del equipo de desarrollo.`;
+                
+                const cuerpoFinal = encodeURIComponent(cuerpoEstructurado);
+
+                // Construcción de la URL mailto incluyendo en copia (CC) al compañero asignado
+                // Esto garantiza que se envíe a vianney@correo.com con copia al destinatario ingresado
+                const mailtoUrl = `mailto:${correoSoporteFijo}?cc=${correoDestino}&subject=${asunto}&body=${cuerpoFinal}`;
+
+                mostrarNotificacion('Abriendo tu cliente de correo para enviar la invitación... 🚀');
+
+                // Ejecución segura del envío abriendo el gestor del sistema operativo
+                setTimeout(() => {
+                    window.location.href = mailtoUrl;
+                }, 800);
+            });
+        });
+    </script>
 </body>
 </html>
